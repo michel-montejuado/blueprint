@@ -23,14 +23,14 @@ export default function Home() {
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Explore the components, customize the theme, and start building your application.
         </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary", mb: 4 }}>
+        <Typography variant="body2" sx={{ color: "text.secondary", mb: 16 }}>
           For more information, visit the
           {" "}
           <Link component={RouterLink} to="https://mui.com/" target="_blank" rel="noopener">
             MUI documentation
           </Link>.
         </Typography>
-        <Grid container columns={12} spacing={4} justifyContent="center">
+        <Grid container columns={12} spacing={4} justifyContent="center" sx={{ mb: 8 }}>
           {
             [{
               title: "Feature 1",
@@ -47,6 +47,16 @@ export default function Home() {
               image: "https://picsum.photos/seed/feature-3/300/200",
               description: "Description of Feature 3",
               to: "/feature3"
+            }, {
+              title: "Feature 4",
+              image: "https://picsum.photos/seed/feature-4/300/200",
+              description: "Description of Feature 4",
+              to: "/feature4"
+            }, {
+              title: "Feature 5",
+              image: "https://picsum.photos/seed/feature-5/300/200",
+              description: "Description of Feature 5",
+              to: "/feature5"
             }].map((feature, index) => (
               <Grid size={4} key={index}>
                 <FeatureCard {...feature} />

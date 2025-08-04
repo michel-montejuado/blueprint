@@ -10,7 +10,7 @@ export default createTheme({
       main: '#0066ff',
     },
     secondary: {
-      main: '#1F271B',
+      main: '#27261b',
     },
   },
 });
