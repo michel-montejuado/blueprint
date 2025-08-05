@@ -1,0 +1,66 @@
+name: Copilot Task
+description: Create a new issue for a GitHub Copilot-related task or feedback
+title: "[Copilot Task]: "
+labels: ["copilot", "task"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Copilot Task Issue
+
+        Please provide detailed information about your Copilot-related task, bug, or feedback.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly summarize the Copilot task or issue.
+      placeholder: e.g., "Improve Copilot code suggestions for Python"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Describe the task, bug, or feedback in detail. Include steps to reproduce, expected behavior, and any relevant context.
+      placeholder: |
+        - What is the problem or task?
+        - What is the expected outcome?
+        - Any relevant logs, screenshots, or examples?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: copilot-area
+    attributes:
+      label: Copilot Area
+      description: Which area of Copilot does this relate to?
+      options:
+        - Editor Suggestions
+        - Pull Request Suggestions
+        - Chat/Assistant
+        - Configuration/Settings
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide details about your environment (e.g., OS, IDE version, Copilot version).
+      placeholder: e.g., "Windows 11, VS Code 1.80, Copilot 1.100.0"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Add any other context or information that may help.
+      placeholder: "Any other notes or links?"
+    validations:
+      required: false
