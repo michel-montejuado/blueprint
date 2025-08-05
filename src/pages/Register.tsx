@@ -1,28 +1,45 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import EmailField from "@/components/auth/EmailField";
 import PasswordField from "@/components/auth/PasswordField";
 import RememberMeField from "@/components/auth/RememberMeField";
 import Copyright from "@/components/Copyright";
+import { db } from "@/db";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    const id = await db.users
+      .add({
+        id: crypto.randomUUID(),
+        email,
+        password,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+    localStorage.setItem("CURRENT_USER", id);
+
+    navigate("/");
   }
 
   return (
-    <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', p: 4, justifyContent: 'center', alignItems: 'center', minHeight: "100vh" }}>
+    <>
       <Typography variant="h2" sx={{ color: "primary.main", mt: 4, mb: 8 }}>Register</Typography>
       <Card sx={{
         width: '100%',
@@ -55,6 +72,6 @@ export default function Home() {
         </CardContent>
       </Card>
       <Copyright />
-    </Container>
+    </>
   );
 }

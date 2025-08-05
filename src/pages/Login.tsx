@@ -1,10 +1,11 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import EmailField from "@/components/auth/EmailField";
@@ -12,17 +13,34 @@ import PasswordField from "@/components/auth/PasswordField";
 import RememberMeField from "@/components/auth/RememberMeField";
 import Copyright from "@/components/Copyright";
 
+import { db } from "@/db";
+
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+
 export default function Login() {
+  const navigate = useNavigate();
+
+  const [, setCurrentUser] = useLocalStorage<string | null>("CURRENT_USER", null);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    const user = await db.users.get({ email, password });
+
+    if (user) {
+      setCurrentUser(user.id);
+      navigate("/");
+    } else {
+      alert("Invalid email or password");
+    }
   }
 
   return (
-    <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', p: 4, justifyContent: 'center', alignItems: 'center', minHeight: "100vh" }}>
+    <>
       <Typography variant="h2" sx={{ color: "primary.main", mt: 4, mb: 8 }}>Login</Typography>
       <Card sx={{
         width: '100%',
@@ -55,6 +73,6 @@ export default function Login() {
         </CardContent>
       </Card>
       <Copyright />
-    </Container>
+    </>
   );
 }

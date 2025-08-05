@@ -1,7 +1,9 @@
 import { useState, type MouseEvent } from 'react';
 
+import SystemModeIcon from '@mui/icons-material/ComputerRounded';
 import DarkModeIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeIcon from '@mui/icons-material/LightModeRounded';
+
 import Box from '@mui/material/Box';
 import IconButton, { type IconButtonOwnProps } from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -74,6 +76,11 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
               variant: 'outlined',
               elevation: 0,
               sx: {
+                "& .MuiList-root": {
+                  display: 'inline-flex',
+                  m: 0,
+                  p: 0,
+                },
                 my: '4px',
               },
             },
@@ -81,14 +88,14 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem selected={mode === 'system'} onClick={handleMode('system')}>
-            System
-          </MenuItem>
           <MenuItem selected={mode === 'light'} onClick={handleMode('light')}>
-            Light
+            <LightModeIcon />
+          </MenuItem>
+          <MenuItem selected={mode === 'system'} onClick={handleMode('system')}>
+            <SystemModeIcon />
           </MenuItem>
           <MenuItem selected={mode === 'dark'} onClick={handleMode('dark')}>
-            Dark
+            <DarkModeIcon />
           </MenuItem>
         </Menu>
       </>

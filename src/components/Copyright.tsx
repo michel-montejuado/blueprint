@@ -15,19 +15,13 @@ export default function Copyright() {
       variant="body2"
       align="center"
       sx={{
-        color: 'text.secondary',
-        mt: "auto",
         mx: 'auto',
+        p: 2,
         fontSize: '0.875rem',
         fontWeight: '400',
         lineHeight: '1.5',
         letterSpacing: '0.00938em',
         textAlign: 'center',
-        padding: '16px',
-        backgroundColor: 'background.paper',
-        borderRadius: '8px',
-        boxShadow: (theme) => theme.shadows[1],
-        maxWidth: 'xl',
         '& a': {
           color: 'primary.main',
           textDecoration: 'none',

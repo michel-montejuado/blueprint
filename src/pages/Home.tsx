@@ -1,18 +1,31 @@
 import { Link as RouterLink } from "react-router";
 
-import Box from "@mui/material/Box";
+import { useLiveQuery } from "dexie-react-hooks";
+
+import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 import FeatureCard from "@/components/home/FeatureCard";
-import Copyright from "@/components/Copyright";
+
+import { db } from "@/db";
 
 export default function Home() {
-  return (
-    <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', pt: 4, pb: 4, justifyContent: 'center', alignItems: 'center', minHeight: "100vh" }}>
-      <Box sx={{ textAlign: "center", mb: 4 }}>
+  const isEmpty = useLiveQuery(async () => db.isEmpty(), [], true);
+
+  if (isEmpty === undefined) {
+    return <CircularProgress />;
+  } else if (isEmpty) {
+    return (
+      <Typography variant="h6" sx={{ color: "text.secondary", mb: 4 }}>
+        No data available. Please add some items to get started.
+      </Typography>
+    );
+  } else {
+    return (
+      <Container sx={{ textAlign: "center", mt: 4 }}>
         <Typography variant="h2" sx={{ color: "primary.main", mb: 2 }}>Welcome @ Blueprint</Typography>
         <Typography variant="h4" sx={{ color: "secondary.main", mb: 4 }}>
           Your blueprint for building modern web applications.
@@ -30,7 +43,7 @@ export default function Home() {
             MUI documentation
           </Link>.
         </Typography>
-        <Grid container columns={12} spacing={4} justifyContent="center" sx={{ mb: 8 }}>
+        <Grid container columns={12} spacing={4} justifyContent="center">
           {
             [{
               title: "Feature 1",
@@ -64,8 +77,7 @@ export default function Home() {
             ))
           }
         </Grid>
-      </Box>
-      <Copyright />
-    </Container>
-  );
+      </Container>
+    );
+  }
 }

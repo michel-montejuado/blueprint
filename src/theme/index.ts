@@ -7,10 +7,12 @@ export default createTheme({
   },
   palette: {
     primary: {
-      main: '#0066ff',
+      main: '#0095cf',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#27261b',
+      main: '#00161f',
+      contrastText: '#ffffff',
     },
-  },
+  }
 });
